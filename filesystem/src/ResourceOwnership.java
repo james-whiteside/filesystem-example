@@ -1,18 +1,28 @@
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ResourceOwnership extends Ownership<
-        ResourceOwnership,
-        ResourceOwnership.Owned,
-        ResourceOwnership.Owner
-        > {
-    <OWNER extends Owner, OWNED extends Owned> ResourceOwnership(OWNED owned, OWNER owner) {
+public class ResourceOwnership extends Ownership {
+    ResourceOwnership(Owned owned, Owner owner) {
         super(owned, owner);
+        owned.setOwnership(this);
+        owner.addResourceOwnership(this);
     }
 
-    public interface Owned extends Ownership.Owned<ResourceOwnership, Owned, Owner> { }
+    Owned owned() {
+        return (Owned) this.owned;
+    }
 
-    public interface Owner extends Ownership.Owner<ResourceOwnership, Owned, Owner> {
+    Owner owner() {
+        return (Owner) this.owner;
+    }
+
+    public interface Owned extends Ownership.Owned {
+        void setOwnership(ResourceOwnership ownership);
+    }
+
+    public interface Owner extends Ownership.Owner {
+        void addResourceOwnership(ResourceOwnership ownership);
+
         default Set<ResourceOwnership> getResourceOwnerships() {
             return getOwnerships().stream()
                     .filter(ownership -> ownership instanceof ResourceOwnership)
@@ -22,7 +32,7 @@ public class ResourceOwnership extends Ownership<
 
         default Set<Owned> getOwnedResources() {
             return getResourceOwnerships().stream()
-                    .map(ownership -> ownership.owned)
+                    .map(ResourceOwnership::owned)
                     .collect(Collectors.toSet());
         }
     }

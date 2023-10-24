@@ -3,11 +3,11 @@ import java.util.Set;
 
 public class User implements Email.Key, ResourceOwnership.Owner {
     Email email;
-    Set<Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner>> resourceOwnerships;
+    Set<Ownership> ownerships;
 
     User(Email email) {
         setEmail(email);
-        resourceOwnerships = new HashSet<>();
+        ownerships = new HashSet<>();
     }
 
     User(String email) {
@@ -25,12 +25,12 @@ public class User implements Email.Key, ResourceOwnership.Owner {
     }
 
     @Override
-    public void addOwnership(Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner> ownership) {
-        resourceOwnerships.add(ownership);
+    public void addResourceOwnership(ResourceOwnership ownership) {
+        ownerships.add(ownership);
     }
 
     @Override
-    public Set<Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner>> getOwnerships() {
-        return resourceOwnerships;
+    public Set<Ownership> getOwnerships() {
+        return ownerships;
     }
 }

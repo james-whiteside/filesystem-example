@@ -1,6 +1,6 @@
 public class File extends Resource<Path> implements Path.Key {
     Path path;
-    Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner> ownership;
+    Ownership ownership;
 
     File(Path path, ResourceOwnership.Owner owner) {
         this.path = path;
@@ -22,12 +22,12 @@ public class File extends Resource<Path> implements Path.Key {
     }
 
     @Override
-    public void setOwnership(Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner> ownership) {
+    public void setOwnership(ResourceOwnership ownership) {
         this.ownership = ownership;
     }
 
     @Override
-    public Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner> getOwnership() {
+    public Ownership getOwnership() {
         return this.ownership;
     }
 }

@@ -2,8 +2,8 @@ import java.util.Set;
 
 public class UserGroup implements Name.Key, GroupOwnership.Owned, ResourceOwnership.Owner {
     Name name;
-    Ownership<GroupOwnership, GroupOwnership.Owned, GroupOwnership.Owner> ownership;
-    Set<Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner>> resourceOwnerships;
+    Ownership ownership;
+    Set<Ownership> ownerships;
 
     UserGroup(Name name, GroupOwnership.Owner owner) {
         this.name = name;
@@ -25,22 +25,22 @@ public class UserGroup implements Name.Key, GroupOwnership.Owned, ResourceOwners
     }
 
     @Override
-    public void setOwnership(Ownership<GroupOwnership, GroupOwnership.Owned, GroupOwnership.Owner> ownership) {
+    public void setOwnership(GroupOwnership ownership) {
         this.ownership = ownership;
     }
 
     @Override
-    public Ownership<GroupOwnership, GroupOwnership.Owned, GroupOwnership.Owner> getOwnership() {
+    public Ownership getOwnership() {
         return this.ownership;
     }
 
     @Override
-    public void addOwnership(Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner> ownership) {
-        this.resourceOwnerships.add(ownership);
+    public void addResourceOwnership(ResourceOwnership ownership) {
+        ownerships.add(ownership);
     }
 
     @Override
-    public Set<Ownership<ResourceOwnership, ResourceOwnership.Owned, ResourceOwnership.Owner>> getOwnerships() {
-        return this.resourceOwnerships;
+    public Set<Ownership> getOwnerships() {
+        return this.ownerships;
     }
 }
