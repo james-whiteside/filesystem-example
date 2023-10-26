@@ -1,8 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        User user = new User("kevin@vaticle.com");
-        File file = new File("hello-world.tql", user);
-        System.out.println(file.getOwner());
-        System.out.println(user.getOwned());
+        Admin naomi = new Admin("naomi@vaticle.com");
+        User amos = new User("amos@vaticle.com");
+        UserGroup engineers = new UserGroup("engineers", naomi);
+        File benchmark = new File("/amos/benchmark-results.xlsx", amos);
+        File roadmap = new File("/vaticle/feature-roadmap.pdf", engineers);
     }
 }
