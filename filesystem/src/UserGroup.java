@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserGroup implements Name.Key, GroupOwnership.Owned, ResourceOwnership.Owner {
@@ -7,6 +8,7 @@ public class UserGroup implements Name.Key, GroupOwnership.Owned, ResourceOwners
 
     UserGroup(Name name, GroupOwnership.Owner owner) {
         this.name = name;
+        this.ownerships = new HashSet<>();
         new GroupOwnership(this, owner);
     }
 
