@@ -23,7 +23,9 @@ public class Main {
                 .filter(ownership -> ownership.get("owned") instanceof Id.Key<?> && ownership.get("owner") instanceof Id.Key<?>)
                 .map(ownership -> Map.of(
                         "owned-id", ((Id.Key<?>) ownership.get("owned")).getId().value,
+                        "owned-type", ownership.get("owned").getClass().getSimpleName(),
                         "owner-id", (((Id.Key<?>) ownership.get("owner")).getId()).value,
+                        "owner-type", ownership.get("owner").getClass().getSimpleName(),
                         "ownership-type", ownership.get("ownership").getClass().getSimpleName()
                         ));
 
