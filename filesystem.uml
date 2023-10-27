@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/jameswhiteside/repos/filesystem-example/filesystem</OriginalElement>
+  <nodes>
+    <node x="-476.6798784783373" y="-92.0">File</node>
+    <node x="-885.6526579194551" y="-92.0">Path</node>
+    <node x="-99.46345064772356" y="-92.0">ResourceOwnership.Owner</node>
+    <node x="-263.39957839223456" y="-334.11411842980704">Ownership.Owned</node>
+    <node x="-263.39957839223456" y="-14.107451763140375">ResourceOwnership.Owned</node>
+    <node x="-99.46345064772356" y="-414.169367930805">Ownership.Owner</node>
+    <node x="68.07251996007983" y="-54.297272122421816">ResourceOwnership</node>
+    <node x="-719.1613855622087" y="-92.0">Path.Key</node>
+    <node x="-890.6526579194551" y="-173.5829673985362">Name</node>
+    <node x="-888.6526579194551" y="-253.89061876247507">Email</node>
+    <node x="-875.6526579194551" y="-14.107451763140375">Id</node>
+    <node x="-719.1613855622087" y="-253.89061876247507">Email.Key</node>
+    <node x="102.57251996007983" y="-373.05245508982034">Ownership</node>
+    <node x="79.57251996007983" y="-214.00806387225546">GroupOwnership</node>
+    <node x="-99.46345064772356" y="-253.89061876247507">GroupOwnership.Owner</node>
+    <node x="-481.1798784783373" y="-253.89061876247507">User</node>
+    <node x="-487.6798784783373" y="-334.11411842980704">Admin</node>
+    <node x="-719.1613855622087" y="-173.5829673985362">Name.Key</node>
+    <node x="-515.6798784783373" y="-14.107451763140375">Resource</node>
+    <node x="-736.6613855622087" y="-14.107451763140375">Id.Key</node>
+    <node x="-263.39957839223456" y="-173.5829673985362">GroupOwnership.Owned</node>
+    <node x="-504.1798784783373" y="-173.5829673985362">UserGroup</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="GroupOwnership.Owner" target="Ownership.Owner" relationship="INTERFACE_GENERALIZATION">
+      <point x="4.506477235608486E-4" y="-14.000381237524891" />
+      <point x="4.506477235608486E-4" y="14.000367930804998" />
+    </edge>
+    <edge source="Name.Key" target="Name" relationship="INNER_CLASS">
+      <point x="-38.5" y="0.0" />
+      <point x="47.0" y="0.0" />
+    </edge>
+    <edge source="Path" target="Id" relationship="GENERALIZATION">
+      <point x="-42.0003420805449" y="0.0" />
+      <point x="-909.0" y="-78.0" />
+      <point x="-909.0" y="-0.1070000000000002" />
+      <point x="31.999657919455103" y="4.517631403748723E-4" />
+    </edge>
+    <edge source="Ownership.Owner" target="Ownership" relationship="INNER_CLASS">
+      <point x="49.0" y="0.0" />
+      <point x="167.07251996007983" y="-400.169367930805" />
+      <point x="0.0" y="-14.0" />
+    </edge>
+    <edge source="Resource" target="Id.Key" relationship="REALIZATION">
+      <point x="-77.0" y="0.0" />
+      <point x="56.0" y="0.0" />
+    </edge>
+    <edge source="Email.Key" target="Email" relationship="INNER_CLASS">
+      <point x="-38.5" y="0.0" />
+      <point x="45.0" y="0.0" />
+    </edge>
+    <edge source="GroupOwnership.Owner" target="GroupOwnership" relationship="INNER_CLASS">
+      <point x="49.0" y="0.0" />
+      <point x="152.073" y="-239.89061876247507" />
+      <point x="-14.999519960079823" y="-14.0" />
+    </edge>
+    <edge source="Name" target="Id" relationship="GENERALIZATION">
+      <point x="-47.0003420805449" y="-3.260146380057449E-5" />
+      <point x="-909.0" y="-159.583" />
+      <point x="-909.0" y="-0.1070000000000002" />
+      <point x="31.999657919455103" y="4.517631403748723E-4" />
+    </edge>
+    <edge source="Resource" target="ResourceOwnership.Owned" relationship="REALIZATION">
+      <point x="77.0" y="0.0" />
+      <point x="-51.0" y="0.0" />
+    </edge>
+    <edge source="Ownership.Owned" target="Ownership" relationship="INNER_CLASS">
+      <point x="51.0" y="-0.8858815701929643" />
+      <point x="152.073" y="-321.0" />
+      <point x="-14.999519960079823" y="14.0" />
+    </edge>
+    <edge source="GroupOwnership.Owned" target="GroupOwnership" relationship="INNER_CLASS">
+      <point x="51.0" y="0.0" />
+      <point x="167.07251996007983" y="-159.5829673985362" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="UserGroup" target="Name.Key" relationship="REALIZATION">
+      <point x="-65.5" y="0.0" />
+      <point x="38.5" y="0.0" />
+    </edge>
+    <edge source="Name.Key" target="Id.Key" relationship="INTERFACE_GENERALIZATION">
+      <point x="3.855622087485244E-4" y="13.9999673985362" />
+      <point x="-680.661" y="-118.7914836992681" />
+      <point x="-586.9206320202729" y="-118.7914836992681" />
+      <point x="-586.9206320202729" y="-39.0" />
+      <point x="-680.6610352628077" y="-39.0" />
+      <point x="3.5029940102049295E-4" y="-13.999548236859624" />
+    </edge>
+    <edge source="File" target="Path.Key" relationship="REALIZATION">
+      <point x="-38.0" y="0.0" />
+      <point x="38.5" y="0.0" />
+    </edge>
+    <edge source="Path.Key" target="Id.Key" relationship="INTERFACE_GENERALIZATION">
+      <point x="3.855622087485244E-4" y="14.0" />
+      <point x="3.5029940102049295E-4" y="-13.999548236859624" />
+    </edge>
+    <edge source="ResourceOwnership.Owned" target="ResourceOwnership" relationship="INNER_CLASS">
+      <point x="51.0" y="0.0" />
+      <point x="167.07251996007983" y="-0.10745176314037508" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="GroupOwnership.Owned" target="Ownership.Owned" relationship="INTERFACE_GENERALIZATION">
+      <point x="-4.2160776544619694E-4" y="13.9999673985362" />
+      <point x="-212.4" y="-63.0" />
+      <point x="-318.28972843528595" y="-63.0" />
+      <point x="-318.28972843528595" y="-320.114" />
+      <point x="-51.00042160776542" y="1.1842980705978334E-4" />
+    </edge>
+    <edge source="Admin" target="GroupOwnership.Owner" relationship="REALIZATION">
+      <point x="21.5" y="14.0" />
+      <point x="-417.1798784783373" y="-280.0023685961411" />
+      <point x="-65.463" y="-280.0023685961411" />
+      <point x="-14.999549352276432" y="-14.0" />
+    </edge>
+    <edge source="GroupOwnership" target="Ownership" relationship="GENERALIZATION">
+      <point x="4.8003992017697783E-4" y="-13.999936127744547" />
+      <point x="4.8003992017697783E-4" y="14.00045508982032" />
+    </edge>
+    <edge source="UserGroup" target="GroupOwnership.Owned" relationship="REALIZATION">
+      <point x="65.5" y="0.0" />
+      <point x="-51.0" y="0.0" />
+    </edge>
+    <edge source="Resource" target="Id" relationship="DEPENDENCY">
+      <point x="0.0" y="14.0" />
+      <point x="-438.6798784783373" y="37.392548236859625" />
+      <point x="-843.6526579194551" y="37.392548236859625" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="Id.Key" target="Id" relationship="INNER_CLASS">
+      <point x="0.0" y="14.0" />
+      <point x="-680.6613855622087" y="-1.107451763140375" />
+      <point x="-828.6526579194551" y="-1.107451763140375" />
+      <point x="15.0" y="14.0" />
+    </edge>
+    <edge source="UserGroup" target="ResourceOwnership.Owner" relationship="REALIZATION">
+      <point x="0.0" y="14.0" />
+      <point x="-438.6798784783373" y="-118.7914836992681" />
+      <point x="-65.463" y="-118.7914836992681" />
+      <point x="-14.999549352276432" y="-14.0" />
+    </edge>
+    <edge source="ResourceOwnership" target="Ownership" relationship="GENERALIZATION">
+      <point x="99.00048003992015" y="2.7212242181917645E-4" />
+      <point x="283.573" y="-40.297" />
+      <point x="283.573" y="-260.0" />
+      <point x="167.073" y="-260.0" />
+      <point x="4.8003992017697783E-4" y="14.00045508982032" />
+    </edge>
+    <edge source="Admin" target="User" relationship="GENERALIZATION">
+      <point x="0.0" y="14.0" />
+      <point x="0.0" y="-14.0" />
+    </edge>
+    <edge source="ResourceOwnership.Owned" target="Ownership.Owned" relationship="INTERFACE_GENERALIZATION">
+      <point x="-4.2160776544619694E-4" y="-13.999548236859624" />
+      <point x="-212.4" y="-63.0" />
+      <point x="-318.28972843528595" y="-63.0" />
+      <point x="-318.28972843528595" y="-320.114" />
+      <point x="-51.00042160776542" y="1.1842980705978334E-4" />
+    </edge>
+    <edge source="User" target="ResourceOwnership.Owner" relationship="REALIZATION">
+      <point x="-1.2152166272016984E-4" y="13.99961876247508" />
+      <point x="-438.68" y="-199.0" />
+      <point x="-50.463" y="-199.0" />
+      <point x="4.506477235608486E-4" y="-14.0" />
+    </edge>
+    <edge source="File" target="Resource" relationship="GENERALIZATION">
+      <point x="0.0" y="14.0" />
+      <point x="0.0" y="-14.0" />
+    </edge>
+    <edge source="ResourceOwnership.Owner" target="Ownership.Owner" relationship="INTERFACE_GENERALIZATION">
+      <point x="49.00045064772356" y="0.0" />
+      <point x="41.63699999999991" y="-78.0" />
+      <point x="41.63699999999991" y="-279.5302594810379" />
+      <point x="-50.463" y="-279.5302594810379" />
+      <point x="4.506477235608486E-4" y="14.000367930804998" />
+    </edge>
+    <edge source="Email.Key" target="Id.Key" relationship="INTERFACE_GENERALIZATION">
+      <point x="3.855622087485244E-4" y="13.99961876247508" />
+      <point x="-680.661" y="-199.0" />
+      <point x="-586.9206320202729" y="-199.0" />
+      <point x="-586.9206320202729" y="-39.0" />
+      <point x="-680.6610352628077" y="-39.0" />
+      <point x="3.5029940102049295E-4" y="-13.999548236859624" />
+    </edge>
+    <edge source="User" target="Email.Key" relationship="REALIZATION">
+      <point x="-42.5" y="0.0" />
+      <point x="38.5" y="0.0" />
+    </edge>
+    <edge source="Path.Key" target="Path" relationship="INNER_CLASS">
+      <point x="-38.5" y="0.0" />
+      <point x="42.0" y="0.0" />
+    </edge>
+    <edge source="ResourceOwnership.Owner" target="ResourceOwnership" relationship="INNER_CLASS">
+      <point x="0.0" y="14.0" />
+      <point x="-50.46345064772356" y="-39.0" />
+      <point x="-99.0" y="1.2972721224218162" />
+    </edge>
+    <edge source="Email" target="Id" relationship="GENERALIZATION">
+      <point x="-45.0003420805449" y="-3.8123752491969753E-4" />
+      <point x="-909.0" y="-239.891" />
+      <point x="-909.0" y="-0.1070000000000002" />
+      <point x="31.999657919455103" y="4.517631403748723E-4" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="-312.5" y="-188.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
