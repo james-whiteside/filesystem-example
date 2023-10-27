@@ -23,6 +23,26 @@ JOIN user_of_resource_ownerships
 ON user_of_resource_ownerships.id = resource_ownerships.id
 JOIN files
 ON files.path = user_of_resource_ownerships.resource_id
+WHERE user_of_resource_ownerships.user_id NOT IN (
+	SELECT admins.email
+	FROM admins
+)
+UNION ALL
+SELECT
+	'resource_ownership' AS ownership_type,
+	'file' AS owned_type,
+	files.path AS owned_id,
+	'admin' AS owner_type,
+	admins.email AS owner_id
+FROM ownerships
+JOIN resource_ownerships
+ON resource_ownerships.id = ownerships.id
+JOIN user_of_resource_ownerships
+ON user_of_resource_ownerships.id = resource_ownerships.id
+JOIN files
+ON files.path = user_of_resource_ownerships.resource_id
+JOIN admins
+ON admins.email = user_of_resource_ownerships.user_id
 UNION ALL
 SELECT
 	'resource_ownership' AS ownership_type,
