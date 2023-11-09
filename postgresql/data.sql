@@ -1,18 +1,21 @@
+-- Instantiate an admin with the specified email.
 DO $$
 BEGIN
 	INSERT INTO users (email)
-	VALUES ('naomi@vaticle.com');
+	VALUES ('cedric@vaticle.com');
 
 	INSERT INTO admins (email)
-	VALUES ('naomi@vaticle.com');
+	VALUES ('cedric@vaticle.com');
 END $$;
 
+-- Instantiate a user with the specified email.
 DO $$
 BEGIN
 	INSERT INTO users (email)
-	VALUES ('amos@vaticle.com');
+	VALUES ('jimmy@vaticle.com');
 END $$;
 
+-- Instantiate a user group with the specified name, and assign the user Cedric as its owner.
 DO $$
 DECLARE
 	ownership_id INT;
@@ -23,23 +26,24 @@ BEGIN
 	INSERT INTO ownerships (id)
 	VALUES (DEFAULT)
 	RETURNING id INTO ownership_id;
-	
+
 	INSERT INTO group_ownerships (id)
 	VALUES (ownership_id);
 	
 	INSERT INTO admin_of_group_ownerships (id, admin_id, user_group_id)
-	VALUES (ownership_id, 'naomi@vaticle.com', 'engineers');
+	VALUES (ownership_id, 'cedric@vaticle.com', 'engineers');
 END $$;
 
+-- Instantiate a file with the specified path, and assign the user Jimmy as its owner.
 DO $$
 DECLARE
 	ownership_id INT;
 BEGIN
 	INSERT INTO resources (id)
-	VALUES ('/amos/benchmark-results.xlsx');
+	VALUES ('/jimmy/benchmark-results.xlsx');
 	
 	INSERT INTO files (path)
-	VALUES ('/amos/benchmark-results.xlsx');
+	VALUES ('/jimmy/benchmark-results.xlsx');
 	
 	INSERT INTO ownerships (id)
 	VALUES (DEFAULT)
@@ -49,9 +53,10 @@ BEGIN
 	VALUES (ownership_id);
 	
 	INSERT INTO user_of_resource_ownerships (id, user_id, resource_id)
-	VALUES (ownership_id, 'amos@vaticle.com', '/amos/benchmark-results.xlsx');
+	VALUES (ownership_id, 'jimmy@vaticle.com', '/jimmy/benchmark-results.xlsx');
 END $$;
 
+-- Instantiate a file with the specified path, and assign the Engineers group as its owner.
 DO $$
 DECLARE
 	ownership_id INT;
