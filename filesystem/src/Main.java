@@ -10,7 +10,7 @@ public class Main {
         // Instantiate a user with the specified email.
         User jimmy = new User("jimmy@vaticle.com");
 
-        // Instantiate a user group with the specified name, and assign the user Cedric as its owner.
+        // Instantiate a user group with the specified name, and assign the admin Cedric as its owner.
         UserGroup engineers = new UserGroup("engineers", cedric);
 
         // Instantiate a file with the specified path, and assign the user Jimmy as its owner.

@@ -15,7 +15,7 @@ BEGIN
 	VALUES ('jimmy@vaticle.com');
 END $$;
 
--- Instantiate a user group with the specified name, and assign the user Cedric as its owner.
+-- Instantiate a user group with the specified name, and assign the admin Cedric as its owner.
 DO $$
 DECLARE
 	ownership_id INT;
