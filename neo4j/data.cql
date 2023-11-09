@@ -5,7 +5,7 @@ CREATE (cedric:User:Admin {email: "cedric@vaticle.com"});
 CREATE (jimmy:User {email: "jimmy@vaticle.com"});
 
 // Instantiate a user group with the specified name, and assign the admin Cedric as its owner.
-MATCH (cedric:User {email: "cedric@vaticle.com"})
+MATCH (cedric:Admin {email: "cedric@vaticle.com"})
 CREATE
     (engineers:UserGroup {name: "engineers"}),
     (cedric)-[:OWNS {ownership_type: "GroupOwnership"}]->(engineers);
