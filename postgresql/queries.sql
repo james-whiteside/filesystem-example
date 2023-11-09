@@ -1,20 +1,19 @@
 -- Retrieve the ID of the feature roadmap's owner.
-SELECT owner_id FROM (
+SELECT owner_id
+FROM (
     SELECT
         resource_ownerships.id AS ownership_id,
         user_of_resource_ownerships.user_id AS owner_id,
         user_of_resource_ownerships.resource_id AS resource_id
     FROM resource_ownerships
-    JOIN user_of_resource_ownerships
-    USING (id)
+    JOIN user_of_resource_ownerships USING (id)
     UNION
     SELECT
         resource_ownerships.id AS ownership_id,
         user_group_of_resource_ownerships.user_group_id AS owner_id,
         user_group_of_resource_ownerships.resource_id AS resource_id
     FROM resource_ownerships
-    JOIN user_group_of_resource_ownerships
-    USING (id)
+    JOIN user_group_of_resource_ownerships USING (id)
 ) AS resource_ownerships
 WHERE resource_id = '/vaticle/feature-roadmap.pdf';
 
@@ -26,16 +25,14 @@ FROM (
         user_of_resource_ownerships.user_id AS owner_id,
         user_of_resource_ownerships.resource_id AS resource_id
     FROM resource_ownerships
-    JOIN user_of_resource_ownerships
-    USING (id)
+    JOIN user_of_resource_ownerships USING (id)
     UNION
     SELECT
         resource_ownerships.id AS ownership_id,
         user_group_of_resource_ownerships.user_group_id AS owner_id,
         user_group_of_resource_ownerships.resource_id AS resource_id
     FROM resource_ownerships
-    JOIN user_group_of_resource_ownerships
-    USING (id)
+    JOIN user_group_of_resource_ownerships USING (id)
 ) AS resource_ownerships
 WHERE owner_id = 'jimmy@vaticle.com';
 
@@ -44,7 +41,7 @@ SELECT object_type, object_id
 FROM (
     SELECT
         'user' AS object_type,
-        email as object_id
+        email AS object_id
     FROM users
     WHERE email NOT IN (
         SELECT email
@@ -53,7 +50,7 @@ FROM (
     UNION
     SELECT
         'admin' AS object_type,
-        email as object_id
+        email AS object_id
     FROM admins
     UNION
     SELECT
@@ -82,10 +79,7 @@ FROM (
         'admin' AS owner_type,
         admin_of_group_ownerships.admin_id AS owner_id
     FROM ownerships
-    JOIN group_ownerships
-    ON group_ownerships.id = ownerships.id
-    JOIN admin_of_group_ownerships
-    ON admin_of_group_ownerships.id = group_ownerships.id
+    JOIN admin_of_group_ownerships USING (id)
     UNION ALL
     SELECT
         'resource_ownership' AS ownership_type,
@@ -94,12 +88,8 @@ FROM (
         'user' AS owner_type,
         user_of_resource_ownerships.user_id AS owner_id
     FROM ownerships
-    JOIN resource_ownerships
-    ON resource_ownerships.id = ownerships.id
-    JOIN user_of_resource_ownerships
-    ON user_of_resource_ownerships.id = resource_ownerships.id
-    JOIN files
-    ON files.path = user_of_resource_ownerships.resource_id
+    JOIN user_of_resource_ownerships USING (id)
+    JOIN files ON files.path = user_of_resource_ownerships.resource_id
     WHERE user_of_resource_ownerships.user_id NOT IN (
         SELECT admins.email
         FROM admins
@@ -112,14 +102,9 @@ FROM (
         'admin' AS owner_type,
         admins.email AS owner_id
     FROM ownerships
-    JOIN resource_ownerships
-    ON resource_ownerships.id = ownerships.id
-    JOIN user_of_resource_ownerships
-    ON user_of_resource_ownerships.id = resource_ownerships.id
-    JOIN files
-    ON files.path = user_of_resource_ownerships.resource_id
-    JOIN admins
-    ON admins.email = user_of_resource_ownerships.user_id
+    JOIN user_of_resource_ownerships USING (id)
+    JOIN files ON files.path = user_of_resource_ownerships.resource_id
+    JOIN admins ON admins.email = user_of_resource_ownerships.user_id
     UNION ALL
     SELECT
         'resource_ownership' AS ownership_type,
@@ -128,10 +113,6 @@ FROM (
         'user_group' AS owner_type,
         user_group_of_resource_ownerships.user_group_id AS owner_id
     FROM ownerships
-    JOIN resource_ownerships
-    ON resource_ownerships.id = ownerships.id
-    JOIN user_group_of_resource_ownerships
-    ON user_group_of_resource_ownerships.id = resource_ownerships.id
-    JOIN files
-    ON files.path = user_group_of_resource_ownerships.resource_id
+    JOIN user_group_of_resource_ownerships USING (id)
+    JOIN files ON files.path = user_group_of_resource_ownerships.resource_id
 ) AS ownerships;
