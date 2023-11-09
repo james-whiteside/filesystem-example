@@ -4,10 +4,10 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        // Instantiate an admin with the specified email
+        // Instantiate an admin with the specified email.
         Admin cedric = new Admin("cedric@vaticle.com");
 
-        // Instantiate a user with the specified email
+        // Instantiate a user with the specified email.
         User jimmy = new User("jimmy@vaticle.com");
 
         // Instantiate a user group with the specified name, and assign the user Cedric as its owner.
@@ -19,22 +19,19 @@ public class Main {
         // Instantiate a file with the specified path, and assign the Engineers group as its owner.
         File roadmap = new File("/vaticle/feature-roadmap.pdf", engineers);
 
-        // Print out Cedric's email
-        System.out.println(cedric.getEmail().value);
-
-        // Print out the ID of the feature roadmap's owner
+        // Retrieve the ID of the feature roadmap's owner.
         System.out.println(((Id.Key<?>) roadmap.getOwner()).getId().value);
 
-        // Print out the IDs of resources owned by Jimmy
+        // Retrieve the IDs of all resources owned by Jimmy.
         System.out.println(jimmy.getOwnedResources().stream()
                 .map(resource -> ((Id.Key<?>) resource).getId().value)
                 .collect(Collectors.toSet())
         );
 
-        // Make a collection of all filesystem objects
+        // Make a collection of all filesystem objects.
         Set<Id.Key<?>> fileSystemObjects = Set.of(cedric, jimmy, engineers, benchmark, roadmap);
 
-        // Print out the type and ID of every object in the filesystem
+        // Retrieve the type and ID of all objects in the filesystem.
         fileSystemObjects.stream()
                 .map(object -> Map.of(
                         "object-type", object.getClass().getSimpleName(),
@@ -42,7 +39,7 @@ public class Main {
                 ))
                 .forEach(System.out::println);
 
-        // Print out the details of every ownership in the filesystem
+        // Retrieve the details of every ownership in the filesystem.
         fileSystemObjects.stream()
                 .filter(object -> object instanceof Ownership.Owned)
                 .map(object -> (Ownership.Owned) object)
