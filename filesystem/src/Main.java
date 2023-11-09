@@ -1,34 +1,58 @@
 import java.util.Set;
 import java.util.Map;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        Admin naomi = new Admin("naomi@vaticle.com");
-        User amos = new User("amos@vaticle.com");
-        UserGroup engineers = new UserGroup("engineers", naomi);
-        File benchmark = new File("/amos/benchmark-results.xlsx", amos);
+        // Instantiate an admin with the specified email
+        Admin cedric = new Admin("cedric@vaticle.com");
+
+        // Instantiate a user with the specified email
+        User jimmy = new User("jimmy@vaticle.com");
+
+        // Instantiate a user group with the specified name, and assign the user Cedric as its owner.
+        UserGroup engineers = new UserGroup("engineers", cedric);
+
+        // Instantiate a file with the specified path, and assign the user Jimmy as its owner.
+        File benchmark = new File("/jimmy/benchmark-results.xlsx", jimmy);
+
+        // Instantiate a file with the specified path, and assign the Engineers group as its owner.
         File roadmap = new File("/vaticle/feature-roadmap.pdf", engineers);
 
-        Set<Object> fileSystemObjects = Set.of(naomi, amos, engineers, benchmark, roadmap);
+        // Print out Cedric's email
+        System.out.println(cedric.getEmail().value);
 
-        Stream<Map<String, String>> fileSystemOwnerships = fileSystemObjects.stream()
+        // Print out the ID of the feature roadmap's owner
+        System.out.println(((Id.Key<?>) roadmap.getOwner()).getId().value);
+
+        // Print out the IDs of resources owned by Jimmy
+        System.out.println(jimmy.getOwnedResources().stream()
+                .map(resource -> ((Id.Key<?>) resource).getId().value)
+                .collect(Collectors.toSet())
+        );
+
+        // Make a collection of all filesystem objects
+        Set<Id.Key<?>> fileSystemObjects = Set.of(cedric, jimmy, engineers, benchmark, roadmap);
+
+        // Print out the type and ID of every object in the filesystem
+        fileSystemObjects.stream()
+                .map(object -> Map.of(
+                        "object-type", object.getClass().getSimpleName(),
+                        "object-id", ((Id.Key<?>) object).getId().value
+                ))
+                .forEach(System.out::println);
+
+        // Print out the details of every ownership in the filesystem
+        fileSystemObjects.stream()
                 .filter(object -> object instanceof Ownership.Owned)
                 .map(object -> (Ownership.Owned) object)
                 .map(owned -> Map.of(
-                        "owned", owned,
-                        "owner", owned.getOwner(),
-                        "ownership", owned.getOwnership()
-                        ))
-                .filter(ownership -> ownership.get("owned") instanceof Id.Key<?> && ownership.get("owner") instanceof Id.Key<?>)
-                .map(ownership -> Map.of(
-                        "owned-id", ((Id.Key<?>) ownership.get("owned")).getId().value,
-                        "owned-type", ownership.get("owned").getClass().getSimpleName(),
-                        "owner-id", (((Id.Key<?>) ownership.get("owner")).getId()).value,
-                        "owner-type", ownership.get("owner").getClass().getSimpleName(),
-                        "ownership-type", ownership.get("ownership").getClass().getSimpleName()
-                        ));
-
-        fileSystemOwnerships.forEach(System.out::println);
+                        "owned-id", ((Id.Key<?>) owned).getId().value,
+                        "owned-type", owned.getClass().getSimpleName(),
+                        "owner-id", (((Id.Key<?>) owned.getOwner()).getId()).value,
+                        "owner-type", owned.getOwner().getClass().getSimpleName(),
+                        "ownership-type", owned.getOwnership().getClass().getSimpleName()
+                ))
+                .forEach(System.out::println);
     }
 }
