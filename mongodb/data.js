@@ -1,15 +1,18 @@
-db.users.insert([
+db.users.insert(
     {
         "email": "cedric@vaticle.com",
         "user_type": "admin"
-    },
+    }
+)
+
+db.users.insert(
     {
         "email": "jimmy@vaticle.com",
         "user_type": "user"
     }
-])
+)
 
-db.user_groups.insert([
+db.user_groups.insert(
     {
         "name": "engineers",
         "owner": {
@@ -17,9 +20,9 @@ db.user_groups.insert([
             "id": "cedric@vaticle.com"
         }
     }
-])
+)
 
-db.resources.insert([
+db.resources.insert(
     {
         "path": "/jimmy/benchmark-results.xlsx",
         "resource_type": "file",
@@ -27,7 +30,10 @@ db.resources.insert([
             "type": "user",
             "id": "jimmy@vaticle.com"
         }
-    },
+    }
+)
+
+db.resources.insert(
     {
         "path": "/vaticle/feature-roadmap.pdf",
         "resource_type": "file",
@@ -36,4 +42,4 @@ db.resources.insert([
             "id": "engineers"
         }
     }
-])
+)
