@@ -33,8 +33,7 @@ AND id_type_map[resource_type] IN keys(resource)
 RETURN resource[id_type_map[resource_type]] AS resource_id;
 
 // Retrieve the type and ID of all objects in the filesystem.
-MATCH
-    (object)
+MATCH (object)
 UNWIND labels(object) AS object_type
 WITH object, object_type,
     {
@@ -52,8 +51,7 @@ AND NOT (
 RETURN object_type, object[id_type_map[object_type]] AS object_id;
 
 // Retrieve the details of every ownership in the filesystem.
-MATCH
-    (owner)-[ownership:OWNS]->(owned)
+MATCH (owner)-[ownership:OWNS]->(owned)
 UNWIND labels(owned) AS owned_type
 UNWIND labels(owner) AS owner_type
 WITH ownership, owned, owned_type, owner, owner_type,

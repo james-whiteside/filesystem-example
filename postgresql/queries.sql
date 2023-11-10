@@ -18,23 +18,10 @@ FROM (
 WHERE resource_id = '/vaticle/feature-roadmap.pdf';
 
 -- Retrieve the IDs of all resources owned by Jimmy.
-SELECT resource_id
-FROM (
-    SELECT
-        resource_ownerships.id AS ownership_id,
-        user_of_resource_ownerships.user_id AS owner_id,
-        user_of_resource_ownerships.resource_id AS resource_id
-    FROM resource_ownerships
-    JOIN user_of_resource_ownerships USING (id)
-    UNION
-    SELECT
-        resource_ownerships.id AS ownership_id,
-        user_group_of_resource_ownerships.user_group_id AS owner_id,
-        user_group_of_resource_ownerships.resource_id AS resource_id
-    FROM resource_ownerships
-    JOIN user_group_of_resource_ownerships USING (id)
-) AS resource_ownerships
-WHERE owner_id = 'jimmy@vaticle.com';
+SELECT user_of_resource_ownerships.resource_id AS resource_id
+FROM resource_ownerships
+JOIN user_of_resource_ownerships USING (id)
+WHERE user_of_resource_ownerships.user_id = 'jimmy@vaticle.com';
 
 -- Retrieve the type and ID of all objects in the filesystem.
 SELECT object_type, object_id
