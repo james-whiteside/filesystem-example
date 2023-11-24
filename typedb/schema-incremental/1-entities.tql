@@ -1,0 +1,38 @@
+define
+
+user sub entity,
+    owns email,
+    owns password-hash,
+    owns created-timestamp,
+    owns active;
+
+admin sub user;
+
+user-group sub entity,
+    owns name,
+    owns created-timestamp;
+
+resource sub entity,
+    abstract,
+    owns id,
+    owns created-timestamp,
+    owns modified-timestamp;
+
+file sub resource,
+    owns path as id;
+
+directory sub resource,
+    owns path as id;
+
+access sub entity,
+    owns name;
+
+id sub attribute, abstract, value string;
+email sub id;
+name sub id;
+path sub id;
+password-hash sub attribute, value string;
+event-timestamp sub attribute, abstract, value datetime;
+created-timestamp sub event-timestamp;
+modified-timestamp sub event-timestamp;
+active sub attribute, value boolean;

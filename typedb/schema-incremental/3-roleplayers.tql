@@ -1,0 +1,24 @@
+define
+
+user plays resource-ownership:resource-owner,
+    plays group-membership:group-member,
+    plays permission:subject,
+    plays login-event:subject;
+
+admin plays group-ownership:group-owner;
+
+user-group plays group-ownership:group,
+    plays resource-ownership:resource-owner,
+    plays group-membership:group,
+    plays permission:subject,
+    plays permission:object;
+
+resource plays resource-ownership:resource,
+    plays permission:object;
+
+file plays directory-membership:directory-member;
+
+directory plays directory-membership:directory,
+    plays directory-membership:directory-member;
+
+access plays permission:access;

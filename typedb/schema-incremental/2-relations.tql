@@ -1,0 +1,40 @@
+define
+
+ownership sub relation,
+    abstract,
+    relates owned,
+    relates owner;
+
+group-ownership sub ownership,
+    relates group as owned,
+    relates group-owner as owner;
+
+resource-ownership sub ownership,
+    relates resource as owned,
+    relates resource-owner as owner;
+
+membership sub relation,
+    abstract,
+    relates parent,
+    relates member;
+
+group-membership sub membership,
+    relates group as parent,
+    relates group-member as member;
+
+directory-membership sub membership,
+    relates directory as parent,
+    relates directory-member as member;
+
+permission sub relation,
+    relates subject,
+    relates object,
+    relates access;
+
+login-event sub relation,
+    relates subject,
+    owns login-timestamp,
+    owns success;
+
+login-timestamp sub event-timestamp;
+success sub attribute, value boolean;

@@ -1,0 +1,10 @@
+define
+
+repository sub resource,
+    owns name as id,
+    plays repository-membership:repository;
+commit sub resource,
+    owns hash as id,
+    plays repository-membership:repository-member;
+
+hash sub id;
