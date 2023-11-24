@@ -1,0 +1,205 @@
+define
+
+user sub entity,
+    owns email,
+    owns password-hash,
+    owns created-timestamp,
+    owns active,
+    plays resource-ownership:resource-owner,
+    plays group-membership:group-member,
+    plays permission:subject,
+    plays login-event:subject;
+admin sub user,
+    plays group-ownership:group-owner;
+user-group sub entity,
+    owns name,
+    owns created-timestamp,
+    plays group-ownership:group,
+    plays resource-ownership:resource-owner,
+    plays group-membership:group,
+    plays permission:subject,
+    plays permission:object;
+resource sub entity,
+    abstract,
+    owns id,
+    owns created-timestamp,
+    owns modified-timestamp,
+    plays resource-ownership:resource,
+    plays permission:object;
+file sub resource,
+    owns path as id,
+    plays directory-membership:directory-member;
+directory sub resource,
+    owns path as id,
+    plays directory-membership:directory,
+    plays directory-membership:directory-member;
+access sub entity,
+    owns name,
+    plays permission:access;
+
+ownership sub relation,
+    abstract,
+    relates owned,
+    relates owner;
+group-ownership sub ownership,
+    relates group as owned,
+    relates group-owner as owner;
+resource-ownership sub ownership,
+    relates resource as owned,
+    relates resource-owner as owner;
+membership sub relation,
+    abstract,
+    relates parent,
+    relates member;
+group-membership sub membership,
+    relates group as parent,
+    relates group-member as member;
+directory-membership sub membership,
+    relates directory as parent,
+    relates directory-member as member;
+permission sub relation,
+    relates subject,
+    relates object,
+    relates access;
+login-event sub relation,
+    relates subject,
+    owns login-timestamp,
+    owns success;
+
+id sub attribute, abstract, value string;
+email sub id;
+name sub id;
+path sub id;
+password-hash sub attribute, value string;
+event-timestamp sub attribute, abstract, value datetime;
+created-timestamp sub event-timestamp;
+modified-timestamp sub event-timestamp;
+login-timestamp sub event-timestamp;
+active sub attribute, value boolean;
+success sub attribute, value boolean;
+
+define
+
+repository sub resource,
+    owns name as id,
+    plays repository-membership:repository;
+commit sub resource,
+    owns hash as id,
+    plays repository-membership:repository-member;
+
+hash sub id;
+
+define
+
+last-modified sub attribute, value datetime;
+resource owns last-modified;
+
+rule automatic-last-modified:
+    when {
+        $resource isa resource,
+            has modified-timestamp $t;
+        not {
+            $resource has modified-timestamp $t-2;
+            $t-2 > $t;
+        };
+        ?last-t = $t;
+    } then {
+        $resource has last-modified ?last-t;
+    };
+
+define
+
+rule implicit-last-modified:
+    when {
+        $resource isa resource,
+            has created-timestamp $t;
+        not { $resource has modified-timestamp $t-2; };
+        ?last-t = $t;
+    } then {
+        $resource has last-modified ?last-t;
+    };
+
+define
+
+last-login sub attribute, value datetime;
+user owns last-login;
+
+rule automatic-last-login:
+    when {
+        $user isa user;
+        (subject: $user) isa login-event,
+            has success true,
+            has login-timestamp $t;
+        not {
+            (subject: $user) isa login-event,
+                has success true,
+                has login-timestamp $t-2;
+            $t-2 > $t;
+        };
+        ?last-t = $t;
+    } then {
+        $user has last-login ?last-t;
+    };
+
+define
+
+indirect-directory-membership sub directory-membership;
+
+rule transitive-directory-memberships:
+    when {
+        (directory: $directory-1, directory-member: $directory-2) isa directory-membership;
+        (directory: $directory-2, directory-member: $x) isa directory-membership;
+    } then {
+        (directory: $directory-1, directory-member: $x) isa indirect-directory-membership;
+    };
+
+define
+
+group-permission sub permission;
+
+rule transitive-group-permissions:
+    when {
+        (group: $group, group-member: $user) isa group-membership;
+        (subject: $group, object: $o, access: $a) isa permission;
+    } then {
+        (subject: $user, object: $o, access: $a) isa group-permission;
+    };
+
+define
+
+owner-permission sub permission;
+
+rule full-owner-permissions:
+    when {
+        (owned: $object, owner: $owner) isa ownership;
+        $access isa access;
+    } then {
+        (subject: $owner, object: $object, access: $access) isa owner-permission;
+    };
+
+define
+
+admin-permission sub permission;
+
+rule full-admin-permissions:
+    when {
+        $admin isa admin;
+        $type plays permission:object;
+        $object isa $type;
+        $access isa access;
+    } then {
+        (subject: $admin, object: $object, access: $access) isa admin-permission;
+    };
+
+define
+
+implied-permission sub permission;
+
+rule implied-read-permission:
+    when {
+        $read isa access, has name "read";
+        $write isa access, has name "write";
+        (subject: $s, object: $o, access: $write) isa permission;
+    } then {
+        (subject: $s, object: $o, access: $read) isa implied-permission;
+    };
