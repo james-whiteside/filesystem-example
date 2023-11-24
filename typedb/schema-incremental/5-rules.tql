@@ -1,0 +1,114 @@
+define
+
+last-modified sub attribute, value datetime;
+resource owns last-modified;
+
+rule automatic-last-modified:
+    when {
+        $resource isa resource,
+            has modified-timestamp $t;
+        not {
+            $resource has modified-timetstamp $t-2;
+            $t-2 > $t;
+        };
+        ?last-t = $t;
+    } then {
+        $resource has last-modified ?last-t;
+    };
+
+define
+
+rule implicit-last-modified:
+    when {
+        $resource isa resource,
+            has created-timestamp $t;
+        not { $resource has modified-timestamp $t-2; };
+        ?last-t = $t;
+    } then {
+        $resource has last-modified ?last-t;
+    };
+
+define
+
+last-login sub attribute, value datetime;
+user owns last-login;
+
+rule automatic-last-login:
+    when {
+        $user isa user;
+        (subject: $user) isa login-event,
+            has success true,
+            has login-timestamp $t;
+        not {
+            (subject: $user) isa login-event,
+                has success true,
+                has login-timestamp $t-2;
+            $t-2 > $t;
+        };
+        ?last-t = $t;
+    } then {
+        $user has last-login ?last-t;
+    };
+
+define
+
+indirect-directory-membership sub directory-membership;
+
+rule transitive-directory-memberships:
+    when {
+        (directory: $directory-1, directory-member: $directory-2) isa directory-membership;
+        (directory: $directory-2, directory-member: $x) isa directory-membership;
+    } then {
+        (directory: $directory-1, directory-member: $x) isa indirect-directory-membership;
+    };
+
+define
+
+group-permission sub permission;
+
+rule transitive-group-permissions:
+    when {
+        (group: $group, group-member: $user) isa group-membership;
+        (subject: $group, object: $o, access: $a) isa permission;
+    } then {
+        (subject: $user, object: $o, access: $a) isa group-permission;
+    };
+
+define
+
+owner-permission sub permission;
+
+rule full-owner-permissions:
+    when {
+        (owned: $object, owner: $owner) isa ownership;
+        $access isa access;
+    } then {
+        (subject: $owner, object: $object, access: $access) isa owner-permission;
+    };
+
+define
+
+admin-permission sub permission;
+
+rule full-admin-permissions:
+    when {
+        $admin isa admin;
+        $type plays permission:object;
+        $object isa $type;
+        $access isa access;
+    } then {
+        (subject: $admin, object: $object, access: $access) isa admin-permission;
+    };
+
+define
+
+implied-permission sub permission;
+
+rule implied-read-permission:
+    when {
+        $read isa access, has name "read";
+        $write isa access, has name "write";
+        (subject: $s, object: $o, access: $write) isa permission;
+    } then {
+        (subject: $s, object: $o, access: $read) isa implied-permission;
+    };
