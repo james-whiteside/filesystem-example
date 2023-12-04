@@ -9,7 +9,7 @@ rule resource-last-modified:
     when {
         $resource isa resource, has modified-timestamp $t;
         not {
-            $resource has modified-timetstamp $t-2;
+            $resource has modified-timestamp $t-2;
             $t-2 > $t;
         };
         ?last-t = $t;
