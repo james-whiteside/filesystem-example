@@ -1,0 +1,11 @@
+match
+$x has $attribute-1;
+$x has $attribute-2;
+$attribute-1 isa! $attribute-type;
+$attribute-2 isa! $attribute-type;
+not { $attribute-1 is $attribute-2; };
+fetch
+$attribute-type;
+"x-type": { match $x isa! $t; fetch $t; };
+"x-id": { match $x has id $id; fetch $id; };
+

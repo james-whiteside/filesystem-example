@@ -1,0 +1,5 @@
+match
+$type plays resource-ownership:resource-owner;
+$x isa $type;
+fetch
+$x: id;

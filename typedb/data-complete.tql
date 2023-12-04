@@ -1,0 +1,193 @@
+# Users
+insert $u isa admin, has email "cedric@vaticle.com", has active true, has created-timestamp 2023-01-01T00:00:00, has password-hash "e0d29e328f65b8074d7df218c73b1726";
+insert $u isa user, has email "jimmy@vaticle.com", has active false, has created-timestamp 2023-11-24T22:09:10, has password-hash "86eb980b1f8da222f3df56992ed9e754";
+insert $u isa user, has email "tommy@vaticle.com", has active true, has created-timestamp 2023-07-19T23:49:05, has password-hash "15d5c0da6584b4e9c49f21cf0f00b2a1";
+insert $u isa user, has email "rhonda@vaticle.com", has active true, has created-timestamp 2023-11-10T15:19:43, has password-hash "6f1127d4b8ee9bd64df9b0ae3f8a7f58";
+insert $u isa user, has email "kima@vaticle.com", has active true, has created-timestamp 2023-08-27T23:46:45, has password-hash "764b6cbabe21823c8a9f8590ad89dc27";
+insert $u isa user, has email "reginald@vaticle.com", has active true, has created-timestamp 2023-03-11T02:30:39, has password-hash "3d7ea1ea4c13c0754983f0a760f47e93";
+
+# Login events
+match $u isa user, has id "cedric@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-01-09T03:54:20, has success true;
+match $u isa user, has id "cedric@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-04-01T13:04:14, has success true;
+match $u isa user, has id "cedric@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-02-12T11:01:46, has success true;
+match $u isa user, has id "cedric@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-04-28T22:59:01, has success true;
+match $u isa user, has id "cedric@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-07-08T11:18:33, has success true;
+match $u isa user, has id "cedric@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-04-26T18:41:25, has success false;
+match $u isa user, has id "jimmy@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-12-17T19:37:21, has success false;
+match $u isa user, has id "jimmy@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-12-27T13:47:41, has success false;
+match $u isa user, has id "tommy@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-08-22T23:28:24, has success true;
+match $u isa user, has id "tommy@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-09-22T05:05:45, has success true;
+match $u isa user, has id "tommy@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-11-25T23:54:35, has success true;
+match $u isa user, has id "rhonda@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-12-29T13:38:51, has success true;
+match $u isa user, has id "rhonda@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-11-14T08:25:24, has success true;
+match $u isa user, has id "rhonda@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-11-22T02:25:32, has success false;
+match $u isa user, has id "kima@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-10-13T03:33:58, has success true;
+match $u isa user, has id "kima@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-10-26T18:31:51, has success true;
+match $u isa user, has id "kima@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-11-21T10:45:28, has success true;
+match $u isa user, has id "kima@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-08-31T02:12:53, has success true;
+match $u isa user, has id "reginald@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-04-03T12:17:32, has success true;
+match $u isa user, has id "reginald@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-08-08T05:06:26, has success true;
+match $u isa user, has id "reginald@vaticle.com"; insert (subject: $u) isa login-event, has login-timestamp 2023-11-15T14:08:56, has success false;
+
+# User groups
+insert $ug isa user-group, has name "engineers", has created-timestamp 2023-09-07T17:47:57;
+match $x has id "engineers"; $y has id "cedric@vaticle.com"; insert (group: $x, group-owner: $y) isa group-ownership;
+match $x has id "engineers"; $y has id "cedric@vaticle.com"; insert (group: $x, group-member: $y) isa group-membership;
+match $x has id "engineers"; $y has id "jimmy@vaticle.com"; insert (group: $x, group-member: $y) isa group-membership;
+match $x has id "engineers"; $y has id "kima@vaticle.com"; insert (group: $x, group-member: $y) isa group-membership;
+match $x has id "engineers"; $y has id "reginald@vaticle.com"; insert (group: $x, group-member: $y) isa group-membership;
+insert $ug isa user-group, has name "researchers", has created-timestamp 2023-09-17T12:32:26;
+match $x has id "researchers"; $y has id "cedric@vaticle.com"; insert (group: $x, group-owner: $y) isa group-ownership;
+match $x has id "researchers"; $y has id "tommy@vaticle.com"; insert (group: $x, group-member: $y) isa group-membership;
+match $x has id "researchers"; $y has id "rhonda@vaticle.com"; insert (group: $x, group-member: $y) isa group-membership;
+
+# Files
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/query-parser.rs", has created-timestamp 2023-05-20T19:12:11;
+match $x has id "/vaticle/engineering/projects/typedb-3.0/query-parser.rs"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs", has created-timestamp 2023-09-20T16:38:44, has modified-timestamp 2023-12-09T14:36:26;
+match $x has id "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/release-notes.md", has created-timestamp 2023-03-18T20:24:08, has modified-timestamp 2023-12-17T22:31:07, has modified-timestamp 2023-06-16T04:07:35, has modified-timestamp 2023-08-29T17:35:51, has modified-timestamp 2023-10-16T17:47:04;
+match $x has id "/vaticle/engineering/projects/typedb-3.0/release-notes.md"; $y has id "reginald@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/technical-specification.md", has created-timestamp 2023-06-28T17:00:14, has modified-timestamp 2023-07-06T21:07:58, has modified-timestamp 2023-09-15T11:28:49, has modified-timestamp 2023-11-24T14:06:36;
+match $x has id "/vaticle/engineering/projects/typedb-3.0/technical-specification.md"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/authentication-service.rs", has created-timestamp 2023-02-24T04:54:27, has modified-timestamp 2023-04-12T21:27:56, has modified-timestamp 2023-11-11T18:53:28, has modified-timestamp 2023-11-17T23:12:44, has modified-timestamp 2023-08-18T15:55:33, has modified-timestamp 2023-12-30T20:27:36;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/authentication-service.rs"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/user-manager.rs", has created-timestamp 2023-06-13T10:19:46, has modified-timestamp 2023-12-12T03:45:35, has modified-timestamp 2023-08-21T22:49:09, has modified-timestamp 2023-07-15T06:10:42, has modified-timestamp 2023-08-10T19:29:13;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/user-manager.rs"; $y has id "reginald@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md", has created-timestamp 2023-01-06T05:14:51;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md"; $y has id "reginald@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md", has created-timestamp 2023-05-30T08:22:44, has modified-timestamp 2023-11-03T00:00:28, has modified-timestamp 2023-07-11T09:22:18, has modified-timestamp 2023-12-06T07:15:09;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/tools/data-generator.rs", has created-timestamp 2023-10-21T19:27:37, has modified-timestamp 2023-11-23T18:04:13, has modified-timestamp 2023-12-16T05:43:58, has modified-timestamp 2023-11-02T00:12:28, has modified-timestamp 2023-11-15T19:41:45;
+match $x has id "/vaticle/engineering/tools/data-generator.rs"; $y has id "jimmy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/engineering/tools/performance-profiler.rs", has created-timestamp 2023-01-28T09:16:24, has modified-timestamp 2023-12-04T23:07:09, has modified-timestamp 2023-02-15T09:13:55, has modified-timestamp 2023-03-25T12:11:15, has modified-timestamp 2023-06-02T06:17:54;
+match $x has id "/vaticle/engineering/tools/performance-profiler.rs"; $y has id "jimmy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/research/papers/type-theory.tex", has created-timestamp 2023-01-13T11:42:06;
+match $x has id "/vaticle/research/papers/type-theory.tex"; $y has id "tommy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/research/papers/polymorphic-database.tex", has created-timestamp 2023-03-01T21:55:50, has modified-timestamp 2023-09-16T12:03:01, has modified-timestamp 2023-06-21T13:44:49, has modified-timestamp 2023-07-05T04:25:50, has modified-timestamp 2023-04-06T15:31:33, has modified-timestamp 2023-08-29T16:30:23;
+match $x has id "/vaticle/research/papers/polymorphic-database.tex"; $y has id "rhonda@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/research/papers/sample-data.csv", has created-timestamp 2023-07-01T05:37:28;
+match $x has id "/vaticle/research/papers/sample-data.csv"; $y has id "rhonda@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/research/prototypes/nlp-query-generator.py", has created-timestamp 2023-06-14T22:44:22, has modified-timestamp 2023-10-10T13:22:37, has modified-timestamp 2023-10-10T13:39:19, has modified-timestamp 2023-08-13T13:16:10, has modified-timestamp 2023-11-29T09:17:47, has modified-timestamp 2023-08-08T11:57:54;
+match $x has id "/vaticle/research/prototypes/nlp-query-generator.py"; $y has id "tommy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $f isa file, has path "/vaticle/research/prototypes/root-cause-analyzer.py", has created-timestamp 2023-01-31T19:39:32, has modified-timestamp 2023-06-22T11:36:20, has modified-timestamp 2023-06-29T12:16:33, has modified-timestamp 2023-07-26T12:33:37;
+match $x has id "/vaticle/research/prototypes/root-cause-analyzer.py"; $y has id "rhonda@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+
+# Directories
+insert $d isa directory, has path "/vaticle/engineering/projects/typedb-3.0", has created-timestamp 2023-10-01T01:46:23, has modified-timestamp 2023-11-23T07:05:18;
+match $x has id "/vaticle/engineering/projects/typedb-3.0"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/engineering/projects/typedb-3.0"; $y has id "/vaticle/engineering/projects/typedb-3.0/query-parser.rs"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/projects/typedb-3.0"; $y has id "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/projects/typedb-3.0"; $y has id "/vaticle/engineering/projects/typedb-3.0/release-notes.md"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/projects/typedb-3.0"; $y has id "/vaticle/engineering/projects/typedb-3.0/technical-specification.md"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle/engineering/projects/typedb-cloud-beta", has created-timestamp 2023-03-13T14:25:07, has modified-timestamp 2023-12-01T03:58:22, has modified-timestamp 2023-10-22T12:22:51, has modified-timestamp 2023-12-28T02:00:04, has modified-timestamp 2023-10-20T13:24:19;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/authentication-service.rs"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/user-manager.rs"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/projects/typedb-cloud-beta"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle/engineering/projects", has created-timestamp 2023-02-03T12:35:44, has modified-timestamp 2023-12-28T08:01:03;
+match $x has id "/vaticle/engineering/projects"; $y has id "engineers"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/engineering/projects"; $y has id "/vaticle/engineering/projects/typedb-3.0"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/projects"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle/engineering/tools", has created-timestamp 2023-11-11T03:21:22, has modified-timestamp 2023-11-19T18:32:25, has modified-timestamp 2023-11-13T01:26:25;
+match $x has id "/vaticle/engineering/tools"; $y has id "engineers"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/engineering/tools"; $y has id "/vaticle/engineering/tools/data-generator.rs"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering/tools"; $y has id "/vaticle/engineering/tools/performance-profiler.rs"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle/engineering", has created-timestamp 2023-08-12T05:34:35, has modified-timestamp 2023-10-11T03:51:28, has modified-timestamp 2023-12-09T16:16:33, has modified-timestamp 2023-10-22T09:04:54;
+match $x has id "/vaticle/engineering"; $y has id "engineers"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/engineering"; $y has id "/vaticle/engineering/projects"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/engineering"; $y has id "/vaticle/engineering/tools"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle/research/papers", has created-timestamp 2023-06-02T09:47:03, has modified-timestamp 2023-12-26T21:41:38, has modified-timestamp 2023-11-10T09:04:03, has modified-timestamp 2023-06-18T17:45:10;
+match $x has id "/vaticle/research/papers"; $y has id "researchers"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/research/papers"; $y has id "/vaticle/research/papers/type-theory.tex"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/research/papers"; $y has id "/vaticle/research/papers/polymorphic-database.tex"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/research/papers"; $y has id "/vaticle/research/papers/sample-data.csv"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle/research/prototypes", has created-timestamp 2023-07-29T00:54:55, has modified-timestamp 2023-10-15T07:58:44;
+match $x has id "/vaticle/research/prototypes"; $y has id "researchers"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/research/prototypes"; $y has id "/vaticle/research/prototypes/nlp-query-generator.py"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/research/prototypes"; $y has id "/vaticle/research/prototypes/root-cause-analyzer.py"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle/research", has created-timestamp 2023-01-01T23:33:44;
+match $x has id "/vaticle/research"; $y has id "researchers"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle/research"; $y has id "/vaticle/research/papers"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle/research"; $y has id "/vaticle/research/prototypes"; insert (directory: $x, directory-member: $y) isa directory-membership;
+insert $d isa directory, has path "/vaticle", has created-timestamp 2023-02-15T07:47:57, has modified-timestamp 2023-06-10T20:19:41, has modified-timestamp 2023-02-26T17:05:13, has modified-timestamp 2023-07-28T13:49:26, has modified-timestamp 2023-10-14T14:16:06, has modified-timestamp 2023-08-31T04:10:51;
+match $x has id "/vaticle"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+match $x has id "/vaticle"; $y has id "/vaticle/engineering"; insert (directory: $x, directory-member: $y) isa directory-membership;
+match $x has id "/vaticle"; $y has id "/vaticle/research"; insert (directory: $x, directory-member: $y) isa directory-membership;
+
+# Accesses
+insert $a isa access, has name "read";
+insert $a isa access, has name "write";
+insert $a isa access, has name "delete";
+
+# Permissions
+match $x has id "engineers"; $y has id "engineers"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "researchers"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-3.0"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/tools"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research/papers"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research/prototypes"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-3.0/query-parser.rs"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-3.0/release-notes.md"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-3.0/technical-specification.md"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/authentication-service.rs"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/user-manager.rs"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/tools/data-generator.rs"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/engineering/tools/performance-profiler.rs"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research/papers/type-theory.tex"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research/papers/polymorphic-database.tex"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research/papers/sample-data.csv"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research/prototypes/nlp-query-generator.py"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "/vaticle/research/prototypes/root-cause-analyzer.py"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "engineers"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "researchers"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects/typedb-3.0"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/tools"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research/papers"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research/prototypes"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects/typedb-3.0/query-parser.rs"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects/typedb-3.0/release-notes.md"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects/typedb-3.0/technical-specification.md"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/tools/data-generator.rs"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/engineering/tools/performance-profiler.rs"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research/papers/type-theory.tex"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research/papers/polymorphic-database.tex"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research/papers/sample-data.csv"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research/prototypes/nlp-query-generator.py"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "/vaticle/research/prototypes/root-cause-analyzer.py"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+
+# Repositories
+insert $r isa repository, has name "typedb", has created-timestamp 2023-05-07T11:30:32;
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $r isa repository, has name "typedb-cloud", has created-timestamp 2023-06-05T14:13:23;
+match $x has id "typedb-cloud"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+
+# Commits
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "5e7547c525134c58cba05e56839024ba", has created-timestamp 2023-05-09T08:26:31;
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "944455bd15208813d3191af634d01c65", has created-timestamp 2023-05-22T10:42:40;
+match $x has id "typedb"; $y has id "kima@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "827513014966f1311ce08fbdc9828558", has created-timestamp 2023-08-19T02:08:58;
+match $x has id "typedb"; $y has id "jimmy@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "07ecd17523bdce01dcfaf442bdddf816", has created-timestamp 2023-08-05T04:13:36;
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "52b1142dabd766ec2e467bc74913de41", has created-timestamp 2023-06-30T04:37:33;
+match $x has id "typedb-cloud"; $y has id "kima@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "ff57036c73f959ff38a6545e2503a2fb", has created-timestamp 2023-09-07T06:18:45;
+match $x has id "typedb-cloud"; $y has id "reginald@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "1d50c78329db2bcfee8fc14d0aaeb168", has created-timestamp 2023-12-13T01:05:03;
+match $x has id "typedb-cloud"; $y has id "kima@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "3abf9e278f53e89de5fd4a8f6643cc19", has created-timestamp 2023-08-21T14:36:31;
+
+# Permissions
+match $x has id "engineers"; $y has id "typedb"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "typedb-cloud"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "typedb"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+

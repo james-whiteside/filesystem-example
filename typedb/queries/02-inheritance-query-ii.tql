@@ -1,0 +1,4 @@
+match
+$resource isa resource;
+fetch
+$resource: id, event-timestamp;

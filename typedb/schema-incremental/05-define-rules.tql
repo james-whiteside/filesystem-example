@@ -3,10 +3,11 @@ define
 last-modified sub attribute, value datetime;
 resource owns last-modified;
 
-rule automatic-last-modified:
+define
+
+rule resource-last-modified:
     when {
-        $resource isa resource,
-            has modified-timestamp $t;
+        $resource isa resource, has modified-timestamp $t;
         not {
             $resource has modified-timetstamp $t-2;
             $t-2 > $t;
@@ -20,12 +21,34 @@ define
 
 rule implicit-last-modified:
     when {
-        $resource isa resource,
-            has created-timestamp $t;
+        $resource isa resource, has created-timestamp $t;
         not { $resource has modified-timestamp $t-2; };
         ?last-t = $t;
     } then {
         $resource has last-modified ?last-t;
+    };
+
+define
+
+rule repository-modified-timestamps:
+    when {
+        $repository isa repository;
+        (repository: $repository) isa commit, has created-timestamp $t;
+        ?new-t = $t;
+    } then {
+        $repository has modified-timestamp ?new-t;
+    };
+
+define
+
+indirect-directory-membership sub directory-membership;
+
+rule transitive-directory-memberships:
+    when {
+        (directory: $directory-1, directory-member: $directory-2) isa directory-membership;
+        (directory: $directory-2, directory-member: $x) isa directory-membership;
+    } then {
+        (directory: $directory-1, directory-member: $x) isa indirect-directory-membership;
     };
 
 define
@@ -48,18 +71,6 @@ rule automatic-last-login:
         ?last-t = $t;
     } then {
         $user has last-login ?last-t;
-    };
-
-define
-
-indirect-directory-membership sub directory-membership;
-
-rule transitive-directory-memberships:
-    when {
-        (directory: $directory-1, directory-member: $directory-2) isa directory-membership;
-        (directory: $directory-2, directory-member: $x) isa directory-membership;
-    } then {
-        (directory: $directory-1, directory-member: $x) isa indirect-directory-membership;
     };
 
 define

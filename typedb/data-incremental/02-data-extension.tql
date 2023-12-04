@@ -1,0 +1,21 @@
+# Repositories
+insert $r isa repository, has name "typedb", has created-timestamp 2023-05-07T11:30:32;
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+insert $r isa repository, has name "typedb-cloud", has created-timestamp 2023-06-05T14:13:23;
+match $x has id "typedb-cloud"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
+
+# Commits
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "5e7547c525134c58cba05e56839024ba", has created-timestamp 2023-05-09T08:26:31;
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "944455bd15208813d3191af634d01c65", has created-timestamp 2023-05-22T10:42:40;
+match $x has id "typedb"; $y has id "kima@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "827513014966f1311ce08fbdc9828558", has created-timestamp 2023-08-19T02:08:58;
+match $x has id "typedb"; $y has id "jimmy@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "07ecd17523bdce01dcfaf442bdddf816", has created-timestamp 2023-08-05T04:13:36;
+match $x has id "typedb"; $y has id "cedric@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "52b1142dabd766ec2e467bc74913de41", has created-timestamp 2023-06-30T04:37:33;
+match $x has id "typedb-cloud"; $y has id "kima@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "ff57036c73f959ff38a6545e2503a2fb", has created-timestamp 2023-09-07T06:18:45;
+match $x has id "typedb-cloud"; $y has id "reginald@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "1d50c78329db2bcfee8fc14d0aaeb168", has created-timestamp 2023-12-13T01:05:03;
+match $x has id "typedb-cloud"; $y has id "kima@vaticle.com"; insert (repository: $x, author: $y) isa commit, has hash "3abf9e278f53e89de5fd4a8f6643cc19", has created-timestamp 2023-08-21T14:36:31;
+
+# Permissions
+match $x has id "engineers"; $y has id "typedb"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "engineers"; $y has id "typedb-cloud"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+match $x has id "researchers"; $y has id "typedb"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
+

@@ -42,35 +42,35 @@ match $x has id "researchers"; $y has id "tommy@vaticle.com"; insert (group: $x,
 match $x has id "researchers"; $y has id "rhonda@vaticle.com"; insert (group: $x, group-member: $y) isa group-membership;
 
 # Files
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-3.0/query-parser.rs", has created-timestamp 2023-05-20T19:12:11;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/query-parser.rs", has created-timestamp 2023-05-20T19:12:11;
 match $x has id "/vaticle/engineering/projects/typedb-3.0/query-parser.rs"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs", has created-timestamp 2023-09-20T16:38:44, has modified-timestamp 2023-12-09T14:36:26;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs", has created-timestamp 2023-09-20T16:38:44, has modified-timestamp 2023-12-09T14:36:26;
 match $x has id "/vaticle/engineering/projects/typedb-3.0/traversal-engine.rs"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-3.0/release-notes.md", has created-timestamp 2023-03-18T20:24:08, has modified-timestamp 2023-12-17T22:31:07, has modified-timestamp 2023-06-16T04:07:35, has modified-timestamp 2023-08-29T17:35:51, has modified-timestamp 2023-10-16T17:47:04;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/release-notes.md", has created-timestamp 2023-03-18T20:24:08, has modified-timestamp 2023-12-17T22:31:07, has modified-timestamp 2023-06-16T04:07:35, has modified-timestamp 2023-08-29T17:35:51, has modified-timestamp 2023-10-16T17:47:04;
 match $x has id "/vaticle/engineering/projects/typedb-3.0/release-notes.md"; $y has id "reginald@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-3.0/technical-specification.md", has created-timestamp 2023-06-28T17:00:14, has modified-timestamp 2023-07-06T21:07:58, has modified-timestamp 2023-09-15T11:28:49, has modified-timestamp 2023-11-24T14:06:36;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-3.0/technical-specification.md", has created-timestamp 2023-06-28T17:00:14, has modified-timestamp 2023-07-06T21:07:58, has modified-timestamp 2023-09-15T11:28:49, has modified-timestamp 2023-11-24T14:06:36;
 match $x has id "/vaticle/engineering/projects/typedb-3.0/technical-specification.md"; $y has id "cedric@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/authentication-service.rs", has created-timestamp 2023-02-24T04:54:27, has modified-timestamp 2023-04-12T21:27:56, has modified-timestamp 2023-11-11T18:53:28, has modified-timestamp 2023-11-17T23:12:44, has modified-timestamp 2023-08-18T15:55:33, has modified-timestamp 2023-12-30T20:27:36;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/authentication-service.rs", has created-timestamp 2023-02-24T04:54:27, has modified-timestamp 2023-04-12T21:27:56, has modified-timestamp 2023-11-11T18:53:28, has modified-timestamp 2023-11-17T23:12:44, has modified-timestamp 2023-08-18T15:55:33, has modified-timestamp 2023-12-30T20:27:36;
 match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/authentication-service.rs"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/user-manager.rs", has created-timestamp 2023-06-13T10:19:46, has modified-timestamp 2023-12-12T03:45:35, has modified-timestamp 2023-08-21T22:49:09, has modified-timestamp 2023-07-15T06:10:42, has modified-timestamp 2023-08-10T19:29:13;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/user-manager.rs", has created-timestamp 2023-06-13T10:19:46, has modified-timestamp 2023-12-12T03:45:35, has modified-timestamp 2023-08-21T22:49:09, has modified-timestamp 2023-07-15T06:10:42, has modified-timestamp 2023-08-10T19:29:13;
 match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/user-manager.rs"; $y has id "reginald@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md", has created-timestamp 2023-01-06T05:14:51;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md", has created-timestamp 2023-01-06T05:14:51;
 match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/release-notes.md"; $y has id "reginald@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md", has created-timestamp 2023-05-30T08:22:44, has modified-timestamp 2023-11-03T00:00:28, has modified-timestamp 2023-07-11T09:22:18, has modified-timestamp 2023-12-06T07:15:09;
+insert $f isa file, has path "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md", has created-timestamp 2023-05-30T08:22:44, has modified-timestamp 2023-11-03T00:00:28, has modified-timestamp 2023-07-11T09:22:18, has modified-timestamp 2023-12-06T07:15:09;
 match $x has id "/vaticle/engineering/projects/typedb-cloud-beta/user-guide.md"; $y has id "kima@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/tools/data-generator.rs", has created-timestamp 2023-10-21T19:27:37, has modified-timestamp 2023-11-23T18:04:13, has modified-timestamp 2023-12-16T05:43:58, has modified-timestamp 2023-11-02T00:12:28, has modified-timestamp 2023-11-15T19:41:45;
+insert $f isa file, has path "/vaticle/engineering/tools/data-generator.rs", has created-timestamp 2023-10-21T19:27:37, has modified-timestamp 2023-11-23T18:04:13, has modified-timestamp 2023-12-16T05:43:58, has modified-timestamp 2023-11-02T00:12:28, has modified-timestamp 2023-11-15T19:41:45;
 match $x has id "/vaticle/engineering/tools/data-generator.rs"; $y has id "jimmy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/engineering/tools/performance-profiler.rs", has created-timestamp 2023-01-28T09:16:24, has modified-timestamp 2023-12-04T23:07:09, has modified-timestamp 2023-02-15T09:13:55, has modified-timestamp 2023-03-25T12:11:15, has modified-timestamp 2023-06-02T06:17:54;
+insert $f isa file, has path "/vaticle/engineering/tools/performance-profiler.rs", has created-timestamp 2023-01-28T09:16:24, has modified-timestamp 2023-12-04T23:07:09, has modified-timestamp 2023-02-15T09:13:55, has modified-timestamp 2023-03-25T12:11:15, has modified-timestamp 2023-06-02T06:17:54;
 match $x has id "/vaticle/engineering/tools/performance-profiler.rs"; $y has id "jimmy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/research/papers/type-theory.tex", has created-timestamp 2023-01-13T11:42:06;
+insert $f isa file, has path "/vaticle/research/papers/type-theory.tex", has created-timestamp 2023-01-13T11:42:06;
 match $x has id "/vaticle/research/papers/type-theory.tex"; $y has id "tommy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/research/papers/polymorphic-database.tex", has created-timestamp 2023-03-01T21:55:50, has modified-timestamp 2023-09-16T12:03:01, has modified-timestamp 2023-06-21T13:44:49, has modified-timestamp 2023-07-05T04:25:50, has modified-timestamp 2023-04-06T15:31:33, has modified-timestamp 2023-08-29T16:30:23;
+insert $f isa file, has path "/vaticle/research/papers/polymorphic-database.tex", has created-timestamp 2023-03-01T21:55:50, has modified-timestamp 2023-09-16T12:03:01, has modified-timestamp 2023-06-21T13:44:49, has modified-timestamp 2023-07-05T04:25:50, has modified-timestamp 2023-04-06T15:31:33, has modified-timestamp 2023-08-29T16:30:23;
 match $x has id "/vaticle/research/papers/polymorphic-database.tex"; $y has id "rhonda@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/research/papers/sample-data.csv", has created-timestamp 2023-07-01T05:37:28;
+insert $f isa file, has path "/vaticle/research/papers/sample-data.csv", has created-timestamp 2023-07-01T05:37:28;
 match $x has id "/vaticle/research/papers/sample-data.csv"; $y has id "rhonda@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/research/prototypes/nlp-query-generator.py", has created-timestamp 2023-06-14T22:44:22, has modified-timestamp 2023-10-10T13:22:37, has modified-timestamp 2023-10-10T13:39:19, has modified-timestamp 2023-08-13T13:16:10, has modified-timestamp 2023-11-29T09:17:47, has modified-timestamp 2023-08-08T11:57:54;
+insert $f isa file, has path "/vaticle/research/prototypes/nlp-query-generator.py", has created-timestamp 2023-06-14T22:44:22, has modified-timestamp 2023-10-10T13:22:37, has modified-timestamp 2023-10-10T13:39:19, has modified-timestamp 2023-08-13T13:16:10, has modified-timestamp 2023-11-29T09:17:47, has modified-timestamp 2023-08-08T11:57:54;
 match $x has id "/vaticle/research/prototypes/nlp-query-generator.py"; $y has id "tommy@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
-insert $d isa file, has path "/vaticle/research/prototypes/root-cause-analyzer.py", has created-timestamp 2023-01-31T19:39:32, has modified-timestamp 2023-06-22T11:36:20, has modified-timestamp 2023-06-29T12:16:33, has modified-timestamp 2023-07-26T12:33:37;
+insert $f isa file, has path "/vaticle/research/prototypes/root-cause-analyzer.py", has created-timestamp 2023-01-31T19:39:32, has modified-timestamp 2023-06-22T11:36:20, has modified-timestamp 2023-06-29T12:16:33, has modified-timestamp 2023-07-26T12:33:37;
 match $x has id "/vaticle/research/prototypes/root-cause-analyzer.py"; $y has id "rhonda@vaticle.com"; insert (resource: $x, resource-owner: $y) isa resource-ownership;
 
 # Directories
@@ -169,3 +169,4 @@ match $x has id "researchers"; $y has id "/vaticle/research/papers/polymorphic-d
 match $x has id "researchers"; $y has id "/vaticle/research/papers/sample-data.csv"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
 match $x has id "researchers"; $y has id "/vaticle/research/prototypes/nlp-query-generator.py"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
 match $x has id "researchers"; $y has id "/vaticle/research/prototypes/root-cause-analyzer.py"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
+
