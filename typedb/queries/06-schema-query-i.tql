@@ -1,0 +1,4 @@
+match
+file owns $attribute-type;
+fetch
+$attribute-type;

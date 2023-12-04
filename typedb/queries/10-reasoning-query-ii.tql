@@ -1,0 +1,7 @@
+match
+$paper isa file, has path "/vaticle/research/papers/type-theory.tex";
+$directory isa directory, has path $path;
+(directory: $directory, directory-member: $paper) isa directory-membership;
+fetch
+$path;
+

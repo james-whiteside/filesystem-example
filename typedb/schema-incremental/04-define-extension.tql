@@ -1,0 +1,16 @@
+define
+
+repository sub resource,
+    owns name as id,
+    plays commit:repository;
+
+commit sub relation,
+    relates repository,
+    relates author,
+    owns hash,
+    owns created-timestamp;
+
+user plays commit:author;
+
+hash sub id;
+

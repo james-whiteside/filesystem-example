@@ -1,0 +1,8 @@
+match
+$ownership-type sub ownership;
+$ownership-type relates $role;
+$type plays $role;
+not { $type abstract; };
+fetch
+$type;
+$role;

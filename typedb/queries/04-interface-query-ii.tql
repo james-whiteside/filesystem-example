@@ -1,0 +1,5 @@
+match
+(resource: $resource, resource-owner: $owner) isa resource-ownership;
+fetch
+$resource: id;
+$owner: id;

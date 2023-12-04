@@ -1,0 +1,4 @@
+match
+$x has created-timestamp $created;
+fetch
+$x: id, created-timestamp;

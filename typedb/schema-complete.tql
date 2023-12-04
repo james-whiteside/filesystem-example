@@ -4,67 +4,28 @@ user sub entity,
     owns email,
     owns password-hash,
     owns created-timestamp,
-    owns active,
-    plays resource-ownership:resource-owner,
-    plays group-membership:group-member,
-    plays permission:subject,
-    plays login-event:subject;
-admin sub user,
-    plays group-ownership:group-owner;
+    owns active;
+
+admin sub user;
+
 user-group sub entity,
     owns name,
-    owns created-timestamp,
-    plays group-ownership:group,
-    plays resource-ownership:resource-owner,
-    plays group-membership:group,
-    plays permission:subject,
-    plays permission:object;
+    owns created-timestamp;
+
 resource sub entity,
     abstract,
     owns id,
     owns created-timestamp,
-    owns modified-timestamp,
-    plays resource-ownership:resource,
-    plays permission:object;
-file sub resource,
-    owns path as id,
-    plays directory-membership:directory-member;
-directory sub resource,
-    owns path as id,
-    plays directory-membership:directory,
-    plays directory-membership:directory-member;
-access sub entity,
-    owns name,
-    plays permission:access;
+    owns modified-timestamp;
 
-ownership sub relation,
-    abstract,
-    relates owned,
-    relates owner;
-group-ownership sub ownership,
-    relates group as owned,
-    relates group-owner as owner;
-resource-ownership sub ownership,
-    relates resource as owned,
-    relates resource-owner as owner;
-membership sub relation,
-    abstract,
-    relates parent,
-    relates member;
-group-membership sub membership,
-    relates group as parent,
-    relates group-member as member;
-directory-membership sub membership,
-    relates directory as parent,
-    relates directory-member as member;
-permission sub relation,
-    relates subject,
-    relates object,
-    relates access;
-login-event sub relation,
-    relates subject,
-    owns login-timestamp,
-    owns success;
+file sub resource,
+    owns path as id;
+
+directory sub resource,
+    owns path as id;
+
+access sub entity,
+    owns name;
 
 id sub attribute, abstract, value string;
 email sub id;
@@ -74,18 +35,87 @@ password-hash sub attribute, value string;
 event-timestamp sub attribute, abstract, value datetime;
 created-timestamp sub event-timestamp;
 modified-timestamp sub event-timestamp;
-login-timestamp sub event-timestamp;
 active sub attribute, value boolean;
+
+define
+
+ownership sub relation,
+    abstract,
+    relates owned,
+    relates owner;
+
+group-ownership sub ownership,
+    relates group as owned,
+    relates group-owner as owner;
+
+resource-ownership sub ownership,
+    relates resource as owned,
+    relates resource-owner as owner;
+
+membership sub relation,
+    abstract,
+    relates parent,
+    relates member;
+
+group-membership sub membership,
+    relates group as parent,
+    relates group-member as member;
+
+directory-membership sub membership,
+    relates directory as parent,
+    relates directory-member as member;
+
+permission sub relation,
+    relates subject,
+    relates object,
+    relates access;
+
+login-event sub relation,
+    relates subject,
+    owns login-timestamp,
+    owns success;
+
+login-timestamp sub event-timestamp;
 success sub attribute, value boolean;
+
+define
+
+user plays resource-ownership:resource-owner,
+    plays group-membership:group-member,
+    plays permission:subject,
+    plays login-event:subject;
+
+admin plays group-ownership:group-owner;
+
+user-group plays group-ownership:group,
+    plays resource-ownership:resource-owner,
+    plays group-membership:group,
+    plays permission:subject,
+    plays permission:object;
+
+resource plays resource-ownership:resource,
+    plays permission:object;
+
+file plays directory-membership:directory-member;
+
+directory plays directory-membership:directory,
+    plays directory-membership:directory-member;
+
+access plays permission:access;
 
 define
 
 repository sub resource,
     owns name as id,
-    plays repository-membership:repository;
-commit sub resource,
-    owns hash as id,
-    plays repository-membership:repository-member;
+    plays commit:repository;
+
+commit sub relation,
+    relates repository,
+    relates author,
+    owns hash,
+    owns created-timestamp;
+
+user plays commit:author;
 
 hash sub id;
 
@@ -94,12 +124,13 @@ define
 last-modified sub attribute, value datetime;
 resource owns last-modified;
 
-rule automatic-last-modified:
+define
+
+rule resource-last-modified:
     when {
-        $resource isa resource,
-            has modified-timestamp $t;
+        $resource isa resource, has modified-timestamp $t;
         not {
-            $resource has modified-timestamp $t-2;
+            $resource has modified-timetstamp $t-2;
             $t-2 > $t;
         };
         ?last-t = $t;
@@ -111,12 +142,34 @@ define
 
 rule implicit-last-modified:
     when {
-        $resource isa resource,
-            has created-timestamp $t;
+        $resource isa resource, has created-timestamp $t;
         not { $resource has modified-timestamp $t-2; };
         ?last-t = $t;
     } then {
         $resource has last-modified ?last-t;
+    };
+
+define
+
+rule repository-modified-timestamps:
+    when {
+        $repository isa repository;
+        (repository: $repository) isa commit, has created-timestamp $t;
+        ?new-t = $t;
+    } then {
+        $repository has modified-timestamp ?new-t;
+    };
+
+define
+
+indirect-directory-membership sub directory-membership;
+
+rule transitive-directory-memberships:
+    when {
+        (directory: $directory-1, directory-member: $directory-2) isa directory-membership;
+        (directory: $directory-2, directory-member: $x) isa directory-membership;
+    } then {
+        (directory: $directory-1, directory-member: $x) isa indirect-directory-membership;
     };
 
 define
@@ -139,18 +192,6 @@ rule automatic-last-login:
         ?last-t = $t;
     } then {
         $user has last-login ?last-t;
-    };
-
-define
-
-indirect-directory-membership sub directory-membership;
-
-rule transitive-directory-memberships:
-    when {
-        (directory: $directory-1, directory-member: $directory-2) isa directory-membership;
-        (directory: $directory-2, directory-member: $x) isa directory-membership;
-    } then {
-        (directory: $directory-1, directory-member: $x) isa indirect-directory-membership;
     };
 
 define
@@ -203,3 +244,4 @@ rule implied-read-permission:
     } then {
         (subject: $s, object: $o, access: $read) isa implied-permission;
     };
+
