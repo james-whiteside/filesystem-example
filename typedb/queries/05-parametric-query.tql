@@ -8,4 +8,3 @@ fetch
 $attribute-type;
 "x-type": { match $x isa! $t; fetch $t; };
 "x-id": { match $x has id $id; fetch $id; };
-

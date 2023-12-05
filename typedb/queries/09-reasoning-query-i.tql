@@ -3,4 +3,3 @@ $resource isa resource, has last-modified $t;
 fetch
 $resource: id;
 $t;
-

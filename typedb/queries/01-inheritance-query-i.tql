@@ -2,4 +2,3 @@ match
 $user isa user;
 fetch
 $user: email, active;
-
