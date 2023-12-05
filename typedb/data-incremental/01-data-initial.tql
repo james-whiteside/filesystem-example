@@ -169,4 +169,3 @@ match $x has id "researchers"; $y has id "/vaticle/research/papers/polymorphic-d
 match $x has id "researchers"; $y has id "/vaticle/research/papers/sample-data.csv"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
 match $x has id "researchers"; $y has id "/vaticle/research/prototypes/nlp-query-generator.py"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
 match $x has id "researchers"; $y has id "/vaticle/research/prototypes/root-cause-analyzer.py"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
-

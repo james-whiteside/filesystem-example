@@ -190,4 +190,3 @@ match $x has id "typedb-cloud"; $y has id "kima@vaticle.com"; insert (repository
 match $x has id "engineers"; $y has id "typedb"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
 match $x has id "engineers"; $y has id "typedb-cloud"; $z has id "write"; insert (subject: $x, object: $y, access: $z) isa permission;
 match $x has id "researchers"; $y has id "typedb"; $z has id "read"; insert (subject: $x, object: $y, access: $z) isa permission;
-

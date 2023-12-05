@@ -13,4 +13,3 @@ commit sub relation,
 user plays commit:author;
 
 hash sub id;
-
