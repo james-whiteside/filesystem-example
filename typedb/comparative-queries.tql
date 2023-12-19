@@ -1,0 +1,35 @@
+# Retrieve the ID of the project directory's owner.
+match
+$projects isa directory, has path "/vaticle/engineering/projects";
+(owned: $projects, owner: $owner) isa ownership;
+$owner has id $id;
+fetch
+$id;
+
+# Retrieve the IDs of all resources owned by Jimmy.
+match
+$jimmy isa user, has email "jimmy@vaticle.com";
+(resource: $resource, resource-owner: $jimmy) isa resource-ownership;
+$resource has id $id;
+fetch
+$id;
+
+# Retrieve the types and IDs of all objects in the filesystem.
+match
+$x isa $type, has id $id;
+fetch
+$type;
+$id;
+
+# Retrieve the details of every ownership in the filesystem.
+match
+$ownership-type sub ownership;
+(owned: $owned, owner: $owner) isa $ownership-type;
+$owned isa $owned-type, has id $owned-id;
+$owner isa $owner-type, has id $owner-id;
+fetch
+$ownership-type;
+$owned-type;
+$owned-id;
+$owner-type;
+$owner-id;
