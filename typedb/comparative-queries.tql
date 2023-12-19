@@ -14,7 +14,7 @@ $resource has id $id;
 fetch
 $id;
 
-# Retrieve the types and IDs of all objects in the filesystem.
+# Retrieve the type and ID of every object in the filesystem.
 match
 $x isa $type, has id $id;
 fetch

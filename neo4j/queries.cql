@@ -32,7 +32,7 @@ WHERE resource_type IN keys(id_type_map)
 AND id_type_map[resource_type] IN keys(resource)
 RETURN resource[id_type_map[resource_type]] AS resource_id;
 
-// Retrieve the type and ID of all objects in the filesystem.
+// Retrieve the type and ID of every object in the filesystem.
 MATCH (object)
 UNWIND labels(object) AS object_type
 WITH object, object_type,

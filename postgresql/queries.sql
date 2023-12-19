@@ -23,7 +23,7 @@ FROM resource_ownerships
 JOIN user_of_resource_ownerships USING (id)
 WHERE user_of_resource_ownerships.user_id = 'jimmy@vaticle.com';
 
--- Retrieve the type and ID of all objects in the filesystem.
+-- Retrieve the type and ID of every object in the filesystem.
 SELECT object_type, object_id
 FROM (
     SELECT

@@ -31,7 +31,7 @@ public class Main {
         // Make a collection of all filesystem objects.
         Set<Id.Key<?>> fileSystemObjects = Set.of(cedric, jimmy, engineers, benchmark, roadmap);
 
-        // Retrieve the type and ID of all objects in the filesystem.
+        // Retrieve the type and ID of every object in the filesystem.
         fileSystemObjects.stream()
                 .map(object -> Map.of(
                         "object-type", object.getClass().getSimpleName(),
