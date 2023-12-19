@@ -43,7 +43,7 @@ db.users.aggregate( [
     } }
 ] )
 
-// Retrieve the type and ID of all objects in the filesystem.
+// Retrieve the type and ID of every object in the filesystem.
 db.users.aggregate( [
     { "$unionWith": { "coll": "groups" } },
     { "$unionWith": { "coll": "resources" } },
