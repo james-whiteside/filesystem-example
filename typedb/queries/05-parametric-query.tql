@@ -1,7 +1,7 @@
 match
-$x has $attribute-1;
-$x has $attribute-2;
-$x isa! $owner-type;
+$owner has $attribute-1;
+$owner has $attribute-2;
+$owner isa! $owner-type;
 $attribute-1 isa! $attribute-type;
 $attribute-2 isa! $attribute-type;
 not { $attribute-1 is $attribute-2; };

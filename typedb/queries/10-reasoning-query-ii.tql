@@ -1,5 +1,5 @@
 match
-$repository isa repository, has last-modified $t;
+$repository isa repository, has last-modified $last-modified;
 fetch
 $repository: id;
-$t;
+$last-modified;
