@@ -1,5 +1,5 @@
 match
-$resource isa resource, has last-modified $t;
+$resource isa resource, has last-modified $last-modified;
 fetch
 $resource: id;
-$t;
+$last-modified;

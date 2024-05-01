@@ -128,25 +128,25 @@ define
 
 rule resource-last-modified:
     when {
-        $resource isa resource, has modified-timestamp $t;
+        $resource isa resource, has modified-timestamp $last-modified;
         not {
-            $resource has modified-timestamp $t-2;
-            $t-2 > $t;
+            $resource has modified-timestamp $other-modified;
+            $other-modified > $last-modified;
         };
-        ?last-t = $t;
+        ?timestamp = $last-modified;
     } then {
-        $resource has last-modified ?last-t;
+        $resource has last-modified ?timestamp;
     };
 
 define
 
 rule implicit-last-modified:
     when {
-        $resource isa resource, has created-timestamp $t;
-        not { $resource has modified-timestamp $t-2; };
-        ?last-t = $t;
+        $resource isa resource, has created-timestamp $created;
+        not { $resource has modified-timestamp $modified; };
+        ?timestamp = $created;
     } then {
-        $resource has last-modified ?last-t;
+        $resource has last-modified ?timestamp;
     };
 
 define
@@ -154,10 +154,10 @@ define
 rule repository-modified-timestamps:
     when {
         $repository isa repository;
-        (repository: $repository) isa commit, has created-timestamp $t;
-        ?new-t = $t;
+        (repository: $repository) isa commit, has created-timestamp $commit-created;
+        ?timestamp = $commit-created;
     } then {
-        $repository has modified-timestamp ?new-t;
+        $repository has modified-timestamp ?timestamp;
     };
 
 define
@@ -167,9 +167,9 @@ indirect-directory-membership sub directory-membership;
 rule transitive-directory-memberships:
     when {
         (directory: $directory-1, directory-member: $directory-2) isa directory-membership;
-        (directory: $directory-2, directory-member: $x) isa directory-membership;
+        (directory: $directory-2, directory-member: $object) isa directory-membership;
     } then {
-        (directory: $directory-1, directory-member: $x) isa indirect-directory-membership;
+        (directory: $directory-1, directory-member: $object) isa indirect-directory-membership;
     };
 
 define
@@ -182,16 +182,16 @@ rule automatic-last-login:
         $user isa user;
         (subject: $user) isa login-event,
             has success true,
-            has login-timestamp $t;
+            has login-timestamp $last-login;
         not {
             (subject: $user) isa login-event,
                 has success true,
-                has login-timestamp $t-2;
-            $t-2 > $t;
+                has login-timestamp $other-login;
+            $other-login > $last-login;
         };
-        ?last-t = $t;
+        ?timestamp = $last-login;
     } then {
-        $user has last-login ?last-t;
+        $user has last-login ?timestamp;
     };
 
 define
@@ -201,9 +201,9 @@ group-permission sub permission;
 rule transitive-group-permissions:
     when {
         (group: $group, group-member: $user) isa group-membership;
-        (subject: $group, object: $o, access: $a) isa permission;
+        (subject: $group, object: $object, access: $access) isa permission;
     } then {
-        (subject: $user, object: $o, access: $a) isa group-permission;
+        (subject: $user, object: $object, access: $access) isa group-permission;
     };
 
 define
@@ -240,7 +240,7 @@ rule implied-read-permission:
     when {
         $read isa access, has name "read";
         $write isa access, has name "write";
-        (subject: $s, object: $o, access: $write) isa permission;
+        (subject: $subject, object: $object, access: $write) isa permission;
     } then {
-        (subject: $s, object: $o, access: $read) isa implied-permission;
+        (subject: $subject, object: $object, access: $read) isa implied-permission;
     };
